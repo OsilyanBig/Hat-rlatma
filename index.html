@@ -3,189 +3,1266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sadece Senin İçin 🌹</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sana Özel Bir Sürpriz ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #fdfcfb;
-            --rose: #e6b8c2;
-            --deep-rose: #d68c96;
-            --text-dark: #4a4a4a;
-            --glass: rgba(255, 255, 255, 0.7);
+            --deep-navy: #0a0e27;
+            --dark-purple: #1a1040;
+            --royal-purple: #2d1b69;
+            --accent-rose: #ff2d55;
+            --soft-rose: #ff6b8a;
+            --gold: #ffd700;
+            --warm-gold: #f4c430;
+            --soft-white: #f0e6ff;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background: linear-gradient(135deg, #d4d3dd 0%, #eef2f3 100%);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-navy);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            color: var(--text-dark);
-        }
-
-        /* Glass Card */
-        .container {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            padding: 40px 25px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            text-align: center;
+            padding: 12px;
+            color: #e8e0f0;
+            overflow-x: hidden;
             position: relative;
         }
 
-        h1, h2 { font-family: 'Playfair Display', serif; color: #333; margin-bottom: 20px; }
+        /* Animated Gradient Background */
+        .bg-aurora {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-        .section { display: none; }
+        .bg-aurora::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            top: -50%; left: -50%;
+            background: conic-gradient(from 0deg at 50% 50%,
+                #0a0e27 0deg,
+                #1a0533 60deg,
+                #2d1b69 120deg,
+                #0f3460 180deg,
+                #16213e 240deg,
+                #1a1040 300deg,
+                #0a0e27 360deg
+            );
+            animation: auroraRotate 20s linear infinite;
+        }
+
+        @keyframes auroraRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .bg-aurora::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255, 45, 85, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(100, 50, 200, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+        }
+
+        /* Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px; height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--max-opacity); transform: scale(1); }
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .f-heart {
+            position: absolute;
+            font-size: 14px;
+            opacity: 0;
+            animation: heartRise var(--dur) ease-in infinite;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes heartRise {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(45deg) scale(1); opacity: 0; }
+        }
+
+        /* Music Bar */
+        .music-bar {
+            position: fixed;
+            top: 12px; right: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 200;
+        }
+
+        .music-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+        }
+
+        .eq-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .eq-bar {
+            width: 3px;
+            background: var(--accent-rose);
+            border-radius: 2px;
+            transition: height 0.3s;
+        }
+
+        .eq-bars.playing .eq-bar:nth-child(1) { animation: eqBounce 0.5s ease infinite alternate; }
+        .eq-bars.playing .eq-bar:nth-child(2) { animation: eqBounce 0.7s ease infinite alternate 0.1s; }
+        .eq-bars.playing .eq-bar:nth-child(3) { animation: eqBounce 0.4s ease infinite alternate 0.2s; }
+        .eq-bars.playing .eq-bar:nth-child(4) { animation: eqBounce 0.6s ease infinite alternate 0.15s; }
+
+        @keyframes eqBounce {
+            from { height: 4px; }
+            to { height: 16px; }
+        }
+
+        .eq-bars:not(.playing) .eq-bar { height: 4px; }
+
+        .music-toggle {
+            background: var(--accent-rose);
+            border: none;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            box-shadow: 0 2px 10px rgba(255, 45, 85, 0.4);
+        }
+
+        .music-toggle:active { transform: scale(0.9); }
+
+        /* MAIN CARD */
+        .card {
+            background: rgba(15, 10, 40, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 22px;
+            border-radius: 28px;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(100, 50, 200, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: 29px;
+            background: linear-gradient(135deg,
+                rgba(255, 45, 85, 0.2),
+                transparent 50%,
+                rgba(255, 215, 0, 0.1)
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: white;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.55;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            display: none;
+            animation: sectionIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         .active { display: block; }
 
-        /* Music */
-        .music-toggle { cursor: pointer; background: var(--rose); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 20px; }
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
-        /* PIN */
-        .pin-input { font-size: 1.5rem; letter-spacing: 10px; margin-bottom: 20px; color: #555; }
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .key { padding: 15px; border: none; background: rgba(255,255,255,0.5); border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
-        .key:active { background: var(--rose); color: white; }
+        /* Hint Badge */
+        .hint-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            color: var(--gold);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            letter-spacing: 0.3px;
+        }
 
-        /* Quiz */
-        .answer-btn { width: 100%; padding: 15px; margin: 8px 0; border: 1px solid #ddd; border-radius: 12px; background: white; cursor: pointer; transition: 0.3s; }
-        .answer-btn:active { border-color: var(--rose); background: #fff5f7; }
-        .feedback { margin-top: 15px; padding: 15px; background: white; border-radius: 15px; border-left: 4px solid var(--rose); font-style: italic; display: none; }
+        /* PIN Display */
+        .pin-display {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 24px;
+        }
 
-        /* Reasons */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .card { padding: 15px; background: white; border-radius: 12px; cursor: pointer; border: 1px solid #eee; transition: 0.3s; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
-        .card.opened { background: #fff5f7; border-color: var(--rose); }
-        .card.special { border: 2px solid #ffd700; background: #fffdf0; box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        .pin-slot {
+            width: 32px; height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background: rgba(255, 255, 255, 0.04);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-        .next-btn { margin-top: 20px; padding: 12px 30px; border-radius: 25px; border: none; background: var(--deep-rose); color: white; cursor: pointer; }
+        .pin-slot.filled {
+            border-color: var(--accent-rose);
+            background: rgba(255, 45, 85, 0.15);
+            box-shadow: 0 0 15px rgba(255, 45, 85, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pin-slot .dot {
+            width: 10px; height: 10px;
+            background: var(--accent-rose);
+            border-radius: 50%;
+            display: none;
+        }
+
+        .pin-slot.filled .dot { display: block; }
+
+        /* Keypad */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .key-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 14px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+            -webkit-user-select: none;
+            user-select: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .key-btn:active {
+            background: rgba(255, 45, 85, 0.3);
+            border-color: var(--accent-rose);
+            transform: scale(0.93);
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.3);
+        }
+
+        .key-btn.delete-key {
+            color: var(--soft-rose);
+        }
+
+        .pin-error {
+            color: var(--accent-rose);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 16px;
+            display: none;
+            animation: errorShake 0.5s;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        /* Success Animation */
+        .pin-success-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 500;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInOverlay 0.3s;
+        }
+
+        .pin-success-overlay.show { display: flex; }
+
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .success-icon {
+            font-size: 80px;
+            animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes successPop {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* QUIZ SECTION */
+        .quiz-progress {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: 0.3s;
+        }
+
+        .progress-dot.active {
+            background: var(--accent-rose);
+            box-shadow: 0 0 8px rgba(255, 45, 85, 0.5);
+        }
+
+        .progress-dot.done {
+            background: var(--gold);
+        }
+
+        .quiz-question-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: white;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-option:active {
+            transform: scale(0.97);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--accent-rose);
+            background: rgba(255, 45, 85, 0.12);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.15);
+        }
+
+        .option-icon {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .quiz-option.selected .option-icon {
+            background: var(--accent-rose);
+        }
+
+        /* Response Bubble */
+        .response-bubble {
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.12), rgba(200, 50, 150, 0.08));
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-top: 12px;
+            display: none;
+            animation: bubbleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .response-bubble.show { display: block; }
+
+        @keyframes bubbleIn {
+            from { opacity: 0; transform: scale(0.9) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .response-text {
+            font-size: 0.88rem;
+            color: var(--soft-rose);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--accent-rose), #e91e63);
+            color: white;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 16px;
+            display: none;
+            transition: 0.2s;
+            box-shadow: 0 6px 20px rgba(255, 45, 85, 0.3);
+            letter-spacing: 0.3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .next-btn:active { transform: scale(0.96); }
+        .next-btn.show { display: inline-block; }
+
+        /* REASONS SECTION */
+        .reasons-header-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .reasons-counter {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 16px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
+
+        .reasons-grid::-webkit-scrollbar { width: 4px; }
+        .reasons-grid::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                rgba(255, 45, 85, 0.08),
+                rgba(255, 215, 0, 0.05)
+            );
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .reason-card.opened::before { opacity: 1; }
+
+        .reason-card .card-num {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        .reason-card .card-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reason-card.opened {
+            border-color: rgba(255, 45, 85, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            cursor: default;
+        }
+
+        .reason-card.opened .card-num,
+        .reason-card.opened .card-label { display: none; }
+
+        .reason-card .opened-text {
+            display: none;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .reason-card.opened .opened-text {
+            display: block;
+            animation: textReveal 0.5s ease;
+        }
+
+        @keyframes textReveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reason-card.highlight-card {
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.06);
+            animation: specialGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes specialGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.2); }
+            50% { box-shadow: 0 0 20px 2px rgba(255, 215, 0, 0.15); }
+        }
+
+        .storage-msg {
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            color: var(--gold);
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            margin-top: 16px;
+            display: none;
+            line-height: 1.45;
+            font-weight: 400;
+        }
+
+        .final-btn {
+            background: linear-gradient(135deg, var(--gold), var(--warm-gold));
+            color: var(--deep-navy);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            margin-top: 16px;
+            display: none;
+            transition: 0.2s;
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.25);
+            letter-spacing: 0.3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .final-btn:active { transform: scale(0.96); }
+
+        /* LETTER SECTION */
+        .letter-envelope {
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .letter-paper {
+            background: linear-gradient(170deg, #1c1235, #150e2a);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 28px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(255, 45, 85, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255, 215, 0, 0.04) 0%, transparent 50%);
+        }
+
+        .letter-paper .letter-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+            display: block;
+            position: relative;
+        }
+
+        .letter-content {
+            font-family: 'Caveat', cursive;
+            font-size: 1.45rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.5;
+            text-align: center;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .letter-signature {
+            margin-top: 18px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--accent-rose);
+            font-weight: 700;
+        }
+
+        .letter-note {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 16px;
+            font-style: italic;
+        }
+
+        .replay-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 18px;
+            font-weight: 500;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .replay-btn:active { transform: scale(0.96); }
+
+        /* Confetti canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .card { padding: 22px 16px; }
+            h1 { font-size: 1.35rem; }
+            h2 { font-size: 1.2rem; }
+            .pin-slot { width: 28px; height: 36px; }
+            .key-btn { padding: 14px; font-size: 1.15rem; }
+            .keypad { gap: 8px; max-width: 250px; }
+            .letter-content { font-size: 1.25rem; }
+        }
+
+        @media (min-width: 600px) {
+            .card { padding: 35px 30px; }
+            .key-btn { padding: 18px; }
+            .reason-card { min-height: 100px; padding: 18px 12px; }
+        }
+
+        @media (min-width: 768px) {
+            .card { max-width: 520px; padding: 40px 35px; }
+            h1 { font-size: 1.8rem; }
+            .reasons-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
 
-    <audio id="audio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+<div class="bg-aurora"></div>
 
-    <div class="container">
-        <!-- Step 1: PIN -->
-        <div id="s1" class="section active">
-            <button class="music-toggle" onclick="playMusic()">Müziği Başlat 🎵</button>
-            <h1>Hoş Geldin ✨</h1>
-            <p style="margin-bottom:20px; opacity: 0.7;">Tarihimizi hatırla...</p>
-            <div class="pin-input" id="pinDisplay">_ _ _ _ _ _ _ _</div>
-            <div class="keypad">
-                <button class="key" onclick="press(1)">1</button><button class="key" onclick="press(2)">2</button><button class="key" onclick="press(3)">3</button>
-                <button class="key" onclick="press(4)">4</button><button class="key" onclick="press(5)">5</button><button class="key" onclick="press(6)">6</button>
-                <button class="key" onclick="press(7)">7</button><button class="key" onclick="press(8)">8</button><button class="key" onclick="press(9)">9</button>
-                <button class="key" style="visibility:hidden"></button><button class="key" onclick="press(0)">0</button><button class="key" onclick="del()">⌫</button>
-            </div>
+<!-- Stars -->
+<div class="stars-container" id="starsContainer"></div>
+
+<!-- Floating Hearts -->
+<div class="floating-hearts" id="heartsContainer"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Music Bar -->
+<div class="music-bar">
+    <div class="eq-bars" id="eqBars">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+    </div>
+    <span class="music-label">müzik</span>
+    <button class="music-toggle" onclick="toggleMusic()" id="musicBtn">▶</button>
+</div>
+
+<audio id="bgAudio" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2024/11/04/audio_4956b54637.mp3?filename=eternal-love-271025.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2023/09/04/audio_3e1e38a6c3.mp3?filename=love-165025.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Success Overlay -->
+<div class="pin-success-overlay" id="successOverlay">
+    <div class="success-icon">💖</div>
+</div>
+
+<!-- Main Card -->
+<div class="card">
+
+    <!-- STEP 1: PIN CODE -->
+    <div id="step1" class="section active">
+        <h1>Bir Sürprizin Var 💫</h1>
+        <p class="subtitle">Devam etmek için şifreyi gir</p>
+        
+        <div class="hint-badge">
+            <span>🗓️</span>
+            <span>İpucu: Sevgili olma tarihimiz</span>
         </div>
 
-        <!-- Step 2: Quiz -->
-        <div id="s2" class="section">
-            <h2 id="qTitle">Soru</h2>
-            <p id="qText" style="margin-bottom:20px;"></p>
-            <div id="options">
-                <button class="answer-btn" onclick="check(true)">Ali Bey</button>
-                <button class="answer-btn" onclick="check(false)">Azra Hanım</button>
-            </div>
-            <div id="feedback" class="feedback"></div>
-            <button id="nextBtn" class="next-btn" style="display:none;" onclick="nextQ()">Devam Et ➔</button>
+        <div class="pin-display" id="pinDisplay">
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
+            <div class="pin-slot"><div class="dot"></div></div>
         </div>
 
-        <!-- Step 3: Reasons -->
-        <div id="s3" class="section">
-            <h2>Neden Seni Seviyorum?</h2>
-            <div class="grid" id="grid"></div>
-            <button id="finishBtn" class="next-btn" style="display:none;" onclick="showFinal()">Mektubum 💌</button>
+        <div class="keypad">
+            <button class="key-btn" onclick="pressKey('1')">1</button>
+            <button class="key-btn" onclick="pressKey('2')">2</button>
+            <button class="key-btn" onclick="pressKey('3')">3</button>
+            <button class="key-btn" onclick="pressKey('4')">4</button>
+            <button class="key-btn" onclick="pressKey('5')">5</button>
+            <button class="key-btn" onclick="pressKey('6')">6</button>
+            <button class="key-btn" onclick="pressKey('7')">7</button>
+            <button class="key-btn" onclick="pressKey('8')">8</button>
+            <button class="key-btn" onclick="pressKey('9')">9</button>
+            <button class="key-btn" style="visibility: hidden;"></button>
+            <button class="key-btn" onclick="pressKey('0')">0</button>
+            <button class="key-btn delete-key" onclick="deleteKey()">⌫</button>
         </div>
-
-        <!-- Step 4: Final -->
-        <div id="s4" class="section">
-            <div style="padding: 20px; background: #fdf5e6; border: 1px solid #eec; border-radius: 10px;">
-                <p style="font-family: 'Playfair Display'; font-size: 1.2rem; line-height: 1.6;">
-                    "Biraz kafa dağıtmaya rahatlamaya ihtiyacımız olduğunu düşünüyordum o yüzden sana böyle bir şey hazırladım umarım beğenmişsindir. Seni Çok Seviyorummmmmmm ❤️"
-                </p>
-            </div>
-            <p style="font-size:0.7rem; margin-top:20px;">Maalesef bu sebepler sonsuza kadar gittiğinden bilgisayar depolamamız kaldırmıyor ama sonsuz sebep olduğunu unutmayınnn</p>
-        </div>
+        <p class="pin-error" id="pinError">Yanlış tarih güzelim, tekrar dene 😉</p>
     </div>
 
+    <!-- STEP 2: QUIZ -->
+    <div id="step2" class="section">
+        <h2 id="quizTitle">Aramızda Bir Quiz 💭</h2>
+        <div class="quiz-progress" id="quizProgress"></div>
+
+        <div class="quiz-question-box">
+            <div class="quiz-question" id="quizQuestion"></div>
+        </div>
+
+        <div class="quiz-options" id="quizOptions"></div>
+
+        <div class="response-bubble" id="responseBubble">
+            <div class="response-text" id="responseText"></div>
+        </div>
+
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Sonraki ➜</button>
+    </div>
+
+    <!-- STEP 3: REASONS -->
+    <div id="step3" class="section">
+        <span class="reasons-header-emoji">🎁</span>
+        <h2>Seni Sevme Sebeplerim</h2>
+        <p class="subtitle">Her kutuya dokun ve sebebini keşfet</p>
+        <div class="reasons-counter" id="reasonsCounter">0 / 12 kutu açıldı</div>
+
+        <div class="reasons-grid" id="reasonsGrid"></div>
+
+        <div class="storage-msg" id="storageMsg">
+            ⚠️ Sebepler sonsuza kadar gittiğinden depolama alanımız yetmiyor ama sonsuz sebep olduğunu asla unutma ❤️
+        </div>
+
+        <button class="final-btn" id="toFinalBtn" onclick="showStep(4)">Mektubunu Oku 💌</button>
+    </div>
+
+    <!-- STEP 4: LETTER -->
+    <div id="step4" class="section">
+        <h1>Sana Bir Mektup ✉️</h1>
+        <p class="subtitle">Bu satırları sana yazdım</p>
+
+        <div class="letter-envelope">
+            <div class="letter-paper">
+                <span class="letter-icon">💌</span>
+                <div class="letter-content">
+                    Biraz kafa dağıtmaya, rahatlamaya ihtiyacımız olduğunu düşünüyordum... O yüzden sana böyle bir şey hazırladım. Umarım beğenmişsindir.
+                    <br><br>
+                    Seni Çok Seviyorummmmmmm ❤️
+                </div>
+                <div class="letter-signature">— Seni seven biri 💋</div>
+            </div>
+        </div>
+
+        <p class="letter-note">Son birkaç günü unutup gülümsediysen ne mutlu bana 🤍</p>
+        <button class="replay-btn" onclick="location.reload()">Baştan Oyna 🔄</button>
+    </div>
+</div>
+
 <script>
-    // Config
-    const PIN = "02072026";
-    let input = "";
-    const questions = [
-        { q: "Hangimiz daha zeki?", ali: "Bu konuda mütevazi olamayacağım şekerim 😎", azra: "İddialı bir cevaptı şekerim 😜" },
-        { q: "Hangimiz daha çok Milan'ız?", ali: "Bunu kabullenmene sevindim 🥰", azra: "Hadi bu seferlik kabul edelim bakalım 😉" },
-        { q: "Hangimizin yaşı daha büyük?", ali: "Minnak bebekcik seni! 👶", azra: "Canım ablam benim! 😄" },
-        { q: "Hangimiz daha melek melek bir insan?", ali: "Teşekkür ederimmm! ✨", azra: "En başından beridir buna inanıyordun, biliyordum! 💖" }
-    ];
-    let qIdx = 0;
-
-    // Logic
-    function press(n) { if(input.length < 8) input += n; updatePin(); if(input.length === 8) checkPin(); }
-    function del() { input = input.slice(0,-1); updatePin(); }
-    function updatePin() { document.getElementById('pinDisplay').innerText = input.padEnd(8, '_'); }
-    function checkPin() { if(input === PIN) show(2); else { alert("Yanlış tarih!"); input=""; updatePin(); } }
-
-    function show(n) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById('s'+n).classList.add('active');
-        if(n === 2) loadQ();
-        if(n === 3) loadReasons();
+    // ===== STARS GENERATION =====
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.setProperty('--duration', (3 + Math.random() * 5) + 's');
+        star.style.setProperty('--max-opacity', (0.3 + Math.random() * 0.7).toString());
+        star.style.animationDelay = Math.random() * 5 + 's';
+        star.style.width = star.style.height = (1 + Math.random() * 2) + 'px';
+        starsContainer.appendChild(star);
     }
 
-    function loadQ() {
-        document.getElementById('qTitle').innerText = `Soru ${qIdx + 1}/4`;
-        document.getElementById('qText').innerText = questions[qIdx].q;
-        document.getElementById('feedback').style.display = 'none';
-        document.getElementById('nextBtn').style.display = 'none';
+    // ===== FLOATING HEARTS =====
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heartEmojis = ['❤️', '💕', '💗', '✨', '💖', '🤍'];
+    for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'f-heart';
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.setProperty('--dur', (8 + Math.random() * 10) + 's');
+        heart.style.setProperty('--delay', Math.random() * 12 + 's');
+        heart.style.fontSize = (10 + Math.random() * 14) + 'px';
+        heartsContainer.appendChild(heart);
     }
 
-    function check(isAli) {
-        document.getElementById('feedback').innerText = isAli ? questions[qIdx].ali : questions[qIdx].azra;
-        document.getElementById('feedback').style.display = 'block';
-        document.getElementById('nextBtn').style.display = 'inline-block';
+    // ===== MUSIC =====
+    const audio = document.getElementById('bgAudio');
+    const musicBtn = document.getElementById('musicBtn');
+    const eqBars = document.getElementById('eqBars');
+    let isPlaying = false;
+
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            musicBtn.textContent = '▶';
+            eqBars.classList.remove('playing');
+        } else {
+            audio.play().catch(() => {});
+            musicBtn.textContent = '⏸';
+            eqBars.classList.add('playing');
+        }
+        isPlaying = !isPlaying;
     }
 
-    function nextQ() {
-        qIdx++;
-        if(qIdx < questions.length) loadQ();
-        else show(3);
+    // ===== PIN CODE =====
+    const CORRECT_PIN = "02072026";
+    let enteredPin = "";
+
+    function pressKey(num) {
+        if (enteredPin.length < 8) {
+            enteredPin += num;
+            updatePinSlots();
+            if (enteredPin.length === 8) {
+                setTimeout(checkPin, 300);
+            }
+        }
     }
 
-    const reasons = ["Bakışlarınla huzur veriyorsun ☀️", "Sesini duymak stresi yok ediyor 🎵", "Aklım her an sende 💭", "Gülüşün modumu değiştiriyor 😊", "İçimdeki çocuğu ortaya çıkarıyorsun 🧸", "Saf sevgiyi seninle öğrendim 🤍", "Tatlı huyların için ✨", "Birlikte gülmek paha biçilemez 😄", "En doğal halin için 🤪", "Rengarenk enerjin için! 🌟", "Hayallerimin başrolü 💍", "Desteğinle hep yanımda olman 🤍"];
-    
-    function loadReasons() {
-        const grid = document.getElementById('grid');
-        reasons.forEach((r, i) => {
-            const el = document.createElement('div');
-            el.className = 'card ' + (i === 9 ? 'special' : '');
-            el.innerText = `Sebep ${i+1}`;
-            el.onclick = () => { el.innerText = r; el.classList.add('opened'); checkFinish(); };
-            grid.appendChild(el);
+    function deleteKey() {
+        enteredPin = enteredPin.slice(0, -1);
+        updatePinSlots();
+        document.getElementById('pinError').style.display = 'none';
+    }
+
+    function updatePinSlots() {
+        const slots = document.querySelectorAll('.pin-slot');
+        slots.forEach((slot, i) => {
+            if (i < enteredPin.length) {
+                slot.classList.add('filled');
+            } else {
+                slot.classList.remove('filled');
+            }
         });
     }
 
-    let opened = 0;
-    function checkFinish() { opened++; if(opened === reasons.length) document.getElementById('finishBtn').style.display = 'block'; }
-    function showFinal() { show(4); }
+    function checkPin() {
+        if (enteredPin === CORRECT_PIN) {
+            // Success
+            const overlay = document.getElementById('successOverlay');
+            overlay.classList.add('show');
+            launchConfetti();
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                showStep(2);
+                loadQuestion();
+            }, 1500);
+        } else {
+            const err = document.getElementById('pinError');
+            err.style.display = 'block';
+            err.style.animation = 'none';
+            err.offsetHeight; // reflow
+            err.style.animation = 'errorShake 0.5s';
+            enteredPin = "";
+            updatePinSlots();
+        }
+    }
 
-    function playMusic() {
-        const a = document.getElementById('audio');
-        a.play();
-        document.querySelector('.music-toggle').innerText = "Müzik Çalıyor 🎵";
+    // ===== QUIZ =====
+    const questions = [
+        {
+            q: "Hangimiz daha zeki? ",
+            options: [
+                { label: "Ali Bey ", value: "ali" },
+                { label: "Azra Hanım ", value: "azra" }
+            ],
+            responses: {
+                ali: "Bu konuda mütevazi olamayacağım şekerim 😎",
+                azra: "İddialı bir cevaptı şekerim "
+            }
+        },
+        {
+            q: "Hangimiz daha çok Milanız? ",
+            options: [
+                { label: "Ali Bey ", value: "ali" },
+                { label: "Azra Hanım ", value: "azra" }
+            ],
+            responses: {
+                ali: "Bunu kabullenmene sevindim ",
+                azra: "Hadi bu seferlik kabul edelim bakalım "
+            }
+        },
+        {
+            q: "Hangimizin yaşı daha büyük? ",
+            options: [
+                { label: "Ali Bey ", value: "ali" },
+                { label: "Azra Hanım ", value: "azra" }
+            ],
+            responses: {
+                ali: "Minnak bebeciğim! ",
+                azra: "Canım ablam benim! "
+            }
+        },
+        {
+            q: "Hangimiz daha melek melek bir insan? ",
+            options: [
+                { label: "Ali Bey ", value: "ali" },
+                { label: "Azra Hanım ", value: "azra" }
+            ],
+            responses: {
+                ali: "Teşekkür ederimmm! ",
+                azra: "En başından beri buna inanıyordun, biliyordum! "
+            }
+        }
+    ];
+
+    let currentQ = 0;
+
+    function loadQuestion() {
+        const qData = questions[currentQ];
+        document.getElementById('quizQuestion').textContent = qData.q;
+        
+        // Progress dots
+        const progressHtml = questions.map((_, i) => {
+            let cls = 'progress-dot';
+            if (i < currentQ) cls += ' done';
+            else if (i === currentQ) cls += ' active';
+            return `<div class="${cls}"></div>`;
+        }).join('');
+        document.getElementById('quizProgress').innerHTML = progressHtml;
+
+        // Options
+        const optionsContainer = document.getElementById('quizOptions');
+        optionsContainer.innerHTML = qData.options.map(opt =>
+            `<div class="quiz-option" onclick="selectAnswer(this, '${opt.value}')">
+                <div class="option-icon">💫</div>
+                <span>${opt.label}</span>
+            </div>`
+        ).join('');
+
+        // Hide response & next button
+        document.getElementById('responseBubble').classList.remove('show');
+        document.getElementById('nextBtn').classList.remove('show');
+    }
+
+    function selectAnswer(element, value) {
+        const qData = questions[currentQ];
+        
+        // Mark selected
+        document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
+        element.querySelector('.option-icon').textContent = '✓';
+
+        // Show response
+        const bubble = document.getElementById('responseBubble');
+        const responseText = document.getElementById('responseText');
+        responseText.textContent = qData.responses[value];
+        bubble.classList.add('show');
+
+        // Show next button
+        document.getElementById('nextBtn').classList.add('show');
+    }
+
+    function nextQuestion() {
+        currentQ++;
+        if (currentQ < questions.length) {
+            loadQuestion();
+        } else {
+            showStep(3);
+            initReasons();
+        }
+    }
+
+    // ===== REASONS =====
+    const reasonsData = [
+        { text: "Bakışlarınla en karmaşık günümü bile anında huzura kavuşturabildiğin için ☀️" },
+        { text: "Sadece sesini duymanın bile içimdeki tüm stresi yok etmeye yetmesi 🎵" },
+        { text: "Yanımda olmadığında bile aklımın ve kalbimin her an seninle dolu olması 💭" },
+        { text: "Gülüşünle modumu saniyeler içinde baştan aşağı değiştirebildiğin için 😊" },
+        { text: "İçimdeki çocuğu sadece senin yanında bu kadar özgürce dışarı çıkarabilmem 🧸" },
+        { text: "Bana sevmeyi ve sevilmeyi en güzel, en masum haliyle hissettirdiğin için 🤍" },
+        { text: "Kendine has o tatlı huyların ve minik jestlerin için ✨" },
+        { text: "En saçma anlarda bile birlikte gülebileceğimiz bir şey bulabilmemiz 😄" },
+        { text: "Birlikte saçmalarken hiç çekinmediğim tek insan olduğun için 🤪" },
+        { text: "Hayatıma getirdiğin o rengarenk ve neşeli enerji için! 🌟✨", highlight: true },
+        { text: "Geleceğe dair kurduğum her hayalin başrolünde sen olduğun için 💍" },
+        { text: "Zor anlarımda desteğini ve sevgini hissettirmekten hiç vazgeçmediğin için. (Sürekli yanında olurum demen beni çok etkilemişti 🤍)" }
+    ];
+
+    let openedCount = 0;
+
+    function initReasons() {
+        const grid = document.getElementById('reasonsGrid');
+        grid.innerHTML = '';
+        openedCount = 0;
+        updateReasonCounter();
+
+        reasonsData.forEach((item, i) => {
+            const card = document.createElement('div');
+            card.className = 'reason-card' + (item.highlight ? ' highlight-card' : '');
+            card.innerHTML = `
+                <span class="card-num">${['🎀','💝','🌸','🦋','🌙','💫','🌹','🍀','🎭','⭐','💎','🔮'][i]}</span>
+                <span class="card-label">Kutu ${i + 1}</span>
+                <span class="opened-text">${item.text}</span>
+            `;
+            card.onclick = () => openReason(card);
+            grid.appendChild(card);
+        });
+    }
+
+    function openReason(card) {
+        if (card.classList.contains('opened')) return;
+        card.classList.add('opened');
+        openedCount++;
+        updateReasonCounter();
+
+        if (openedCount === reasonsData.length) {
+            document.getElementById('storageMsg').style.display = 'block';
+            document.getElementById('toFinalBtn').style.display = 'inline-block';
+            launchConfetti();
+        }
+    }
+
+    function updateReasonCounter() {
+        document.getElementById('reasonsCounter').textContent = `${openedCount} / ${reasonsData.length} kutu açıldı`;
+    }
+
+    // ===== NAVIGATION =====
+    function showStep(num) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        const step = document.getElementById('step' + num);
+        step.classList.add('active');
+        // Re-trigger animation
+        step.style.animation = 'none';
+        step.offsetHeight;
+        step.style.animation = 'sectionIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        
+        if (num === 4) {
+            launchConfetti();
+        }
+    }
+
+    // ===== CONFETTI =====
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const ctx = confettiCanvas.getContext('2d');
+    let confettiPieces = [];
+    let confettiAnimating = false;
+
+    function resizeCanvas() {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function launchConfetti() {
+        confettiPieces = [];
+        const colors = ['#ff2d55', '#ffd700', '#ff6b8a', '#a78bfa', '#f472b6', '#34d399', '#60a5fa'];
+        for (let i = 0; i < 100; i++) {
+            confettiPieces.push({
+                x: Math.random() * confettiCanvas.width,
+                y: -10 - Math.random() * 200,
+                w: 6 + Math.random() * 6,
+                h: 4 + Math.random() * 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: (Math.random() - 0.5) * 4,
+                vy: 2 + Math.random() * 4,
+                rot: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 10,
+                opacity: 1
+            });
+        }
+        if (!confettiAnimating) {
+            confettiAnimating = true;
+            animateConfetti();
+        }
+    }
+
+    function animateConfetti() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        let alive = false;
+        confettiPieces.forEach(p => {
+            if (p.opacity <= 0) return;
+            alive = true;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.rotSpeed;
+            p.vy += 0.05;
+            if (p.y > confettiCanvas.height) p.opacity -= 0.02;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot * Math.PI / 180);
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+        });
+
+        if (alive) {
+            requestAnimationFrame(animateConfetti);
+        } else {
+            confettiAnimating = false;
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
     }
 </script>
+
 </body>
 </html>
