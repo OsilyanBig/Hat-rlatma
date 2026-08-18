@@ -1010,21 +1010,7 @@
     const eqBars = document.getElementById('eqBars');
     let isPlaying = false;
 
-    // Try multiple music sources
-    const musicSources = [
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-    ];
-    let currentSource = 0;
-
-    audio.addEventListener('error', function() {
-        currentSource++;
-        if (currentSource < musicSources.length) {
-            audio.src = musicSources[currentSource];
-            if (isPlaying) audio.play().catch(()=>{});
-        }
-    });
-
+    
     function toggleMusic() {
         if (isPlaying) {
             audio.pause();
@@ -1032,23 +1018,9 @@
             eqBars.classList.remove('playing');
         } else {
             audio.volume = 0.4;
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    musicBtn.textContent = '⏸';
-                    eqBars.classList.add('playing');
-                }).catch(() => {
-                    // Try next source
-                    currentSource++;
-                    if (currentSource < musicSources.length) {
-                        audio.src = musicSources[currentSource];
-                        audio.play().then(() => {
-                            musicBtn.textContent = '⏸';
-                            eqBars.classList.add('playing');
-                        }).catch(()=>{});
-                    }
-                });
-            }
+            audio.play().catch(()=>{});
+            musicBtn.textContent = '⏸';
+            eqBars.classList.add('playing');
         }
         isPlaying = !isPlaying;
     }
